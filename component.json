@@ -1,0 +1,32 @@
+{
+    "name": "accounts",
+    "description": "accounts",
+    "dependencies": {
+        "visionmedia/page.js": "*",
+        "serandomps/async": "master",
+        "serandomps/dust": "master",
+        "serandomps/serand": "master",
+        "serandomps/user": "master",
+        "serandomps/auto-add": "master",
+        "serandomps/auto-details": "master",
+        "serandomps/auto-listing": "master",
+        "serandomps/auto-search": "master",
+        "serandomps/breadcrumb": "master",
+        "serandomps/navigation": "master",
+        "serandomps/accounts-home": "master",
+        "serandomps/accounts-navigation": "master",
+        "serandomps/accounts-signup": "master",
+        "serandomps/accounts-profile": "master",
+        "serandomps/upload": "master",
+        "serandomps/user-login": "master",
+        "serandomps/user-register": "master"
+    },
+    "scripts": ["boot.js"],
+    "styles": ["nunito.css", "oxygen.css", "boot.css"],
+    "templates": ["component.json", "one-column.html", "two-column.html", "three-column.html"],
+    "images": [
+        "images/logo.png",
+        "images/logo@2x.png"
+    ],
+    "main": "boot.js"
+}
