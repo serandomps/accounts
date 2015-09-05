@@ -16,6 +16,7 @@
         "serandomps/accounts-home": "master",
         "serandomps/accounts-navigation": "master",
         "serandomps/accounts-signup": "master",
+        "serandomps/accounts-signin": "master",
         "serandomps/accounts-profile": "master",
         "serandomps/upload": "master",
         "serandomps/user-login": "master",
