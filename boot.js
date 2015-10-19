@@ -4,16 +4,14 @@ var serand = require('serand');
 var page = serand.page;
 var redirect = serand.redirect;
 var current = serand.current;
-var layout = serand.layout('serandomps~accounts@master');
+
+var app = serand.boot('serandomps~accounts@master');
+var layout = serand.layout(app);
 
 var user;
 
 var dest;
 
-require('user');
-require('user-login');
-require('navigation');
-//require('accounts-navigation');
 var can = function (permission) {
     return function (ctx, next) {
         if (user) {
@@ -22,10 +20,6 @@ var can = function (permission) {
         serand.emit('user', 'login', ctx.path);
     };
 };
-
-//registering jquery, bootstrap etc. plugins
-require('upload');
-//init app
 
 page('/', function (ctx) {
     layout('one-column')
@@ -107,15 +101,16 @@ serand.on('user', 'login', function (path) {
     redirect('/signin');
 });
 
-serand.on('user', 'logged in', function (usr) {
+serand.on('user', 'ready', function (usr) {
     user = usr;
-    if (!dest) {
-        return;
-    }
-    redirect(dest);
 });
 
-serand.on('user', 'logged out', function (data) {
+serand.on('user', 'logged in', function (usr) {
+    user = usr;
+    redirect(dest || '/');
+});
+
+serand.on('user', 'logged out', function (usr) {
     user = null;
     redirect('/');
 });
