@@ -18,11 +18,11 @@
         "serandomps/accounts-signup": "master",
         "serandomps/accounts-signin": "master",
         "serandomps/accounts-profile": "master",
-        "serandomps/upload": "master",
-        "serandomps/user-login": "master",
-        "serandomps/user-register": "master"
+        "serandomps/accounts-authorize": "master",
+        "serandomps/accounts-authorized": "master",
+        "serandomps/upload": "master"
     },
-    "scripts": ["boot.js"],
+    "scripts": ["boot.js", "controllers/signin.js"],
     "styles": ["nunito.css", "oxygen.css", "boot.css"],
     "templates": ["component.json", "one-column.html", "two-column.html", "three-column.html"],
     "images": [

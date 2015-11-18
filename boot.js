@@ -8,6 +8,8 @@ var current = serand.current;
 var app = serand.boot('serandomps~accounts@master');
 var layout = serand.layout(app);
 
+var signin = require('./controllers/signin');
+
 var user;
 
 var dest;
@@ -28,6 +30,42 @@ page('/', function (ctx) {
         .add('breadcrumb')
         .area('#middle')
         .add('accounts-home')
+        .render();
+});
+
+page('/signin', signin.already, function (ctx) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('accounts-signin', ctx.options)
+        .render();
+});
+
+page('/signup', function (ctx) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('accounts-signup')
+        .render();
+});
+
+page('/authorize', function (ctx) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('accounts-authorize', ctx.state)
+        .render();
+});
+
+page('/authorized', function (ctx) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('accounts-authorized', ctx.state)
         .render();
 });
 
@@ -67,24 +105,6 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
         .render();
 });
 
-page('/signin', function (ctx) {
-    layout('one-column')
-        .area('#header')
-        .add('accounts-navigation')
-        .area('#middle')
-        .add('accounts-signin')
-        .render();
-});
-
-page('/signup', function (ctx) {
-    layout('one-column')
-        .area('#header')
-        .add('accounts-navigation')
-        .area('#middle')
-        .add('accounts-signup')
-        .render();
-});
-
 page('/add', can('vehicle:create'), function (ctx) {
     layout('one-column')
         .area('#header')
@@ -94,8 +114,6 @@ page('/add', can('vehicle:create'), function (ctx) {
         .render();
 });
 
-//TODO: redirect user to login page when authentication is needed
-//TODO: basically a front controller pattern
 serand.on('user', 'login', function (path) {
     dest = path;
     redirect('/signin');
@@ -105,9 +123,19 @@ serand.on('user', 'ready', function (usr) {
     user = usr;
 });
 
-serand.on('user', 'logged in', function (usr) {
+serand.on('user', 'logged in', function (usr, options) {
     user = usr;
-    redirect(dest || '/');
+    if(!options) {
+        return redirect(dest || '/');
+    }
+    redirect('/authorize', {
+        user: usr,
+        options: options
+    });
+});
+
+serand.on('user', 'authorized', function (options) {
+    redirect('/authorized', options);
 });
 
 serand.on('user', 'logged out', function (usr) {
