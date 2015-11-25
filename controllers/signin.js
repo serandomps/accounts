@@ -1,10 +1,19 @@
 var serand = require('serand');
 var redirect = serand.redirect;
 
+var ready;
+
+var pending;
+
 var user;
 
 serand.on('user', 'ready', function (usr) {
     user = usr;
+    ready = true;
+    if (!pending) {
+        return;
+    }
+    pending();
 });
 
 serand.on('user', 'logged in', function (usr) {
@@ -25,11 +34,18 @@ module.exports.already = function (ctx, next) {
         scope: ctx.query.scope,
         location: ctx.query.redirect_uri
     };
-    if (!user) {
-        return next();
+    var process = function () {
+        if (!user) {
+            return next();
+        }
+        redirect('/authorize', {
+            user: user,
+            options: ctx.options
+        });
+    };
+    if (!ready) {
+        pending = process;
+        return;
     }
-    redirect('/authorize', {
-        user: user,
-        options: ctx.options
-    });
+    process();
 };
