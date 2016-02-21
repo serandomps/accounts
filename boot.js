@@ -3,7 +3,6 @@ var dust = require('dust')();
 var serand = require('serand');
 var page = serand.page;
 var redirect = serand.redirect;
-var current = serand.current;
 
 var app = serand.boot('serandomps~accounts@master');
 var layout = serand.layout(app);
@@ -116,7 +115,9 @@ page('/add', can('vehicle:create'), function (ctx) {
 
 serand.on('user', 'login', function (path) {
     dest = path;
-    redirect('/signin');
+    serand.emit('user', 'authenticator', dest, function (err, uri) {
+        redirect(uri);
+    });
 });
 
 serand.on('user', 'ready', function (usr) {
@@ -125,7 +126,7 @@ serand.on('user', 'ready', function (usr) {
 
 serand.on('user', 'logged in', function (usr, options) {
     user = usr;
-    if(!options) {
+    if (!options.location) {
         return redirect(dest || '/');
     }
     redirect('/authorize', {

@@ -7,6 +7,8 @@ var pending;
 
 var user;
 
+var base = 'https://accounts.serandives.com';
+
 serand.on('user', 'ready', function (usr) {
     user = usr;
     ready = true;
@@ -29,8 +31,15 @@ module.exports.already = function (ctx, next) {
     //TODO: handle the flow when user has already signed in
     //account or autos module can depend on other modules, but no other module should depend on any
     //other module
+    var clientId = ctx.query.client_id;
+    if (!clientId) {
+        serand.emit('user', 'authenticator', function (err, uri) {
+            redirect(uri.substring(base.length));
+        });
+        return;
+    }
     ctx.options = {
-        clientId: ctx.query.client_id,
+        clientId: clientId,
         scope: ctx.query.scope,
         location: ctx.query.redirect_uri
     };
