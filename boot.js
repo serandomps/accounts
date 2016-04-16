@@ -41,6 +41,21 @@ page('/signin', signin.already, function (ctx) {
         .render();
 });
 
+page('/auth/oauth', function (ctx) {
+    var el = $('#content');
+    layout('one-column')
+      .area('#header')
+      .add('accounts-navigation')
+      .area('#middle')
+      .add('accounts-token', {
+          scope: el.data('scope'),
+          code: el.data('code'),
+          error: el.data('error'),
+          errorCode: el.data('errorCode')
+      })
+      .render();
+});
+
 page('/signup', function (ctx) {
     layout('one-column')
         .area('#header')
@@ -115,7 +130,7 @@ page('/add', can('vehicle:create'), function (ctx) {
 
 serand.on('user', 'login', function (path) {
     dest = path;
-    serand.emit('user', 'authenticator', dest, function (err, uri) {
+    serand.emit('user', 'authenticator', {location: dest}, function (err, uri) {
         redirect(uri);
     });
 });
