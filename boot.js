@@ -137,10 +137,12 @@ serand.on('user', 'login', function (path) {
 
 serand.on('user', 'ready', function (usr) {
     user = usr;
+    page();
 });
 
 serand.on('user', 'logged in', function (usr, options) {
     user = usr;
+    options = options || {};
     if (!options.location) {
         return redirect(dest || '/');
     }
