@@ -4,7 +4,7 @@ var serand = require('serand');
 var page = serand.page;
 var redirect = serand.redirect;
 
-var app = serand.boot('serandomps~accounts@master');
+var app = serand.boot('accounts');
 var layout = serand.layout(app);
 
 var signin = require('./controllers/signin');
