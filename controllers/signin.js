@@ -1,4 +1,5 @@
 var serand = require('serand');
+var utils = require('utils');
 var redirect = serand.redirect;
 
 var ready;
@@ -7,7 +8,7 @@ var pending;
 
 var user;
 
-var base = 'https://accounts.serandives.com';
+var base = utils.resolve('accounts://');
 
 serand.on('user', 'ready', function (usr) {
     user = usr;
