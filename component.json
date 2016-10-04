@@ -9,10 +9,7 @@
         "serandomps/user": "master",
         "serandomps/utils": "master",
         "serandomps/token": "master",
-        "serandomps/auto-add": "master",
-        "serandomps/auto-details": "master",
-        "serandomps/auto-listing": "master",
-        "serandomps/auto-search": "master",
+        "serandomps/home": "master",
         "serandomps/breadcrumb": "master",
         "serandomps/navigation": "master",
         "serandomps/accounts-home": "master",
@@ -26,11 +23,12 @@
         "serandomps/upload": "master"
     },
     "scripts": ["boot.js", "controllers/signin.js"],
-    "styles": ["nunito.css", "oxygen.css", "boot.css"],
+    "styles": ["nunito.css", "oxygen.css", "boot.css", "theme.css"],
     "templates": ["component.json", "one-column.html", "two-column.html", "three-column.html"],
     "images": [
         "images/logo.png",
-        "images/logo@2x.png"
+        "images/logo@2x.png",
+        "images/*"
     ],
     "files": ["index.html"],
     "main": "boot.js"

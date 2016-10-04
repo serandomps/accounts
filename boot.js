@@ -35,7 +35,7 @@ page('/', function (ctx) {
 page('/signin', signin.already, function (ctx) {
     layout('one-column')
         .area('#header')
-        .add('accounts-navigation')
+        .add('home', {title: 'Welcome to serandives.com'})
         .area('#middle')
         .add('accounts-signin', ctx.options)
         .render();
