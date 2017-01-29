@@ -91,7 +91,7 @@ page('/vehicles', function (ctx) {
         .area('#right')
         .add('vehicles-search', ctx.query)
         .area('#middle')
-        .add('vehicles-listing', ctx.query)
+        .add('vehicles-find', ctx.query)
         .render();
 });
 
@@ -101,7 +101,7 @@ page('/vehicles/:id', can('vehicle:read'), function (ctx) {
         .add('accounts-navigation')
         .add('breadcrumb')
         .area('#middle')
-        .add('vehicles-details', {
+        .add('vehicles-findone', {
             id: ctx.params.id
         })
         .render();
@@ -113,7 +113,7 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
         .add('accounts-navigation')
         .add('breadcrumb')
         .area('#middle')
-        .add('vehicles-add', {
+        .add('vehicles-create', {
             id: ctx.params.id
         })
         .render();
@@ -124,7 +124,7 @@ page('/add', can('vehicle:create'), function (ctx) {
         .area('#header')
         .add('accounts-navigation')
         .area('#middle')
-        .add('vehicles-add', {})
+        .add('vehicles-create', {})
         .render();
 });
 

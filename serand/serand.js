@@ -7260,7 +7260,7 @@ module.exports.cdn800x450 = function (items) {
 };
 });
 
-require.register("serandomps~vehicles-add@master", function (exports, module) {
+require.register("serandomps~vehicles-create@master", function (exports, module) {
 var dust = require('serandomps~dust@master')();
 var serand = require('serandomps~serand@master');
 var utils = require('serandomps~autos-utils@master');
@@ -7320,14 +7320,14 @@ var remove = function (id, done) {
     });
 };
 
-dust.loadSource(dust.compile(require('serandomps~vehicles-add@master/preview.html'), 'vehicles-add-preview'));
-dust.loadSource(dust.compile(require('serandomps~vehicles-add@master/template.html'), 'vehicles-add'));
+dust.loadSource(dust.compile(require('serandomps~vehicles-create@master/preview.html'), 'vehicles-create-preview'));
+dust.loadSource(dust.compile(require('serandomps~vehicles-create@master/template.html'), 'vehicles-create'));
 
 var render = function (sandbox, fn, data) {
     var update = data._.update;
     var id = data.id;
     var existing = data.photos || [];
-    dust.render('vehicles-add', utils.cdn288x162(data), function (err, out) {
+    dust.render('vehicles-create', utils.cdn288x162(data), function (err, out) {
         if (err) {
             return;
         }
@@ -7367,7 +7367,7 @@ var render = function (sandbox, fn, data) {
             data.context = $('<div class="col-md-3 file"></div>');
             $.each(data.files, function (index, file) {
                 var length = pending.push(file);
-                dust.render('vehicles-add-preview', {
+                dust.render('vehicles-create-preview', {
                     name: file.name,
                     index: length - 1
                 }, function (err, out) {
@@ -7467,7 +7467,7 @@ var render = function (sandbox, fn, data) {
             el.closest('.file').remove();
         });
         fn(false, function () {
-            $('.vehicles-add', sandbox).remove();
+            $('.vehicles-create', sandbox).remove();
         });
     });
 };
@@ -7500,9 +7500,9 @@ module.exports = function (sandbox, fn, options) {
 };
 });
 
-require.define("serandomps~vehicles-add@master/template.html", "<div class=\"vehicles-add panel panel-default\">\n    <div class=\"panel-heading\">\n        <h3 class=\"panel-title\">{?_.update}Edit{:else}Add{/_.update} Vehicle</h3>\n    </div>\n    <div class=\"panel-body\">\n        <form role=\"form\" class=\"auto-create\">\n            {#.}\n            <div class=\"form-group make\" data-value=\"{make}\">\n                <!--<label>Make</label>-->\n                <select class=\"form-control\">\n                    <option>Honda</option>\n                    <option>Toyota</option>\n                    <option>Mazda</option>\n                    <option>Nissan</option>\n                    <option>Suzzuki</option>\n                </select>\n            </div>\n            <div class=\"form-group model\" data-value=\"{model}\">\n                <!--<label>Make</label>-->\n                <select class=\"form-control\">\n                    <option>Vezel</option>\n                    <option>Insight</option>\n                    <option>Fit</option>\n                    <option>Civic</option>\n                    <option>CR-V</option>\n                </select>\n            </div>\n            <div class=\"form-group year\" data-value=\"{year}\">\n                <!--<label>Make</label>-->\n                <select class=\"form-control\">\n                    <option>2014</option>\n                    <option>2013</option>\n                    <option>2012</option>\n                    <option>2011</option>\n                    <option>2010</option>\n                    <option>2009</option>\n                </select>\n            </div>\n            <div class=\"form-group condition\" data-value=\"{condition}\">\n                <label>Condition</label>\n\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"condition\" value=\"brandnew\" checked>Brand New\n                    </label>\n                </div>\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"condition\" value=\"unregistered\">Unregistered\n                    </label>\n                </div>\n                <div class=\"radio disabled\">\n                    <label>\n                        <input type=\"radio\" name=\"condition\" value=\"used\">Used\n                    </label>\n                </div>\n            </div>\n            <div class=\"form-group transmission\" data-value=\"{transmission}\">\n                <label>Transmission</label>\n\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"transmission\" value=\"automatic\" checked>Automatic\n                    </label>\n                </div>\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"transmission\" value=\"manual\">Manual\n                    </label>\n                </div>\n                <div class=\"radio disabled\">\n                    <label>\n                        <input type=\"radio\" name=\"transmission\" value=\"manumatic\">Manumatic\n                    </label>\n                </div>\n            </div>\n            <div class=\"form-group fuel\" data-value=\"{fuel}\">\n                <label>Fuel</label>\n\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"fuel\" value=\"petrol\" checked>Petrol\n                    </label>\n                </div>\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"fuel\" value=\"diesel\">Diesel\n                    </label>\n                </div>\n                <div class=\"radio disabled\">\n                    <label>\n                        <input type=\"radio\" name=\"fuel\" value=\"hybrid\">Hybrid\n                    </label>\n                </div>\n            </div>\n            <div class=\"form-group color\">\n                <label>Color</label>\n                <input type=\"text\" class=\"form-control\" placeholder=\"Color\" value=\"{color}\">\n            </div>\n            <div class=\"form-group mileage\">\n                <label>Mileage</label>\n                <input type=\"text\" class=\"form-control\" placeholder=\"Mileage\" value=\"{mileage}\">\n            </div>\n            <div class=\"form-group price\">\n                <label>Price</label>\n                <input type=\"text\" class=\"form-control\" placeholder=\"Minimum\" value=\"{price}\">\n            </div>\n            <div class=\"form-group description\">\n                <label>Description</label>\n                <textarea class=\"form-control\" rows=\"6\">{description}</textarea>\n            </div>\n            <div class=\"form-group photos\">\n                <span class=\"btn btn-success fileinput-button upload-button\">\n                    <i class=\"glyphicon glyphicon-plus\"></i>\n                    <span> Select Images...</span>\n                    <input type=\"file\" multiple=\"\" name=\"files[]\" class=\"fileupload\">\n                </span>\n\n                <!--<div id=\"progress\" class=\"progress\">\n                    <div class=\"progress-bar progress-bar-success\"></div>\n                </div>-->\n                <div class=\"files row\">\n                    {#_.update}\n                    {#photos}\n                    <div class=\"col-md-3 file\">\n                        {>\"vehicles-add-preview\"/}\n                    </div>\n                    {/photos}\n                    {/_.update}\n                </div>\n            </div>\n            {/.}\n            <div class=\"form-group\">\n                <button type=\"button\" class=\"btn btn-default add\">{?_.update}Save{:else}Add{/_.update}</button>\n                {?_.update}\n                <button type=\"button\" class=\"btn btn-default delete\">Delete</button>\n                {/_.update}\n            </div>\n        </form>\n    </div>\n</div>");
+require.define("serandomps~vehicles-create@master/template.html", "<div class=\"vehicles-create panel panel-default\">\n    <div class=\"panel-heading\">\n        <h3 class=\"panel-title\">{?_.update}Edit{:else}Add{/_.update} Vehicle</h3>\n    </div>\n    <div class=\"panel-body\">\n        <form role=\"form\" class=\"auto-create\">\n            {#.}\n            <div class=\"form-group make\" data-value=\"{make}\">\n                <!--<label>Make</label>-->\n                <select class=\"form-control\">\n                    <option>Honda</option>\n                    <option>Toyota</option>\n                    <option>Mazda</option>\n                    <option>Nissan</option>\n                    <option>Suzzuki</option>\n                </select>\n            </div>\n            <div class=\"form-group model\" data-value=\"{model}\">\n                <!--<label>Make</label>-->\n                <select class=\"form-control\">\n                    <option>Vezel</option>\n                    <option>Insight</option>\n                    <option>Fit</option>\n                    <option>Civic</option>\n                    <option>CR-V</option>\n                </select>\n            </div>\n            <div class=\"form-group year\" data-value=\"{year}\">\n                <!--<label>Make</label>-->\n                <select class=\"form-control\">\n                    <option>2014</option>\n                    <option>2013</option>\n                    <option>2012</option>\n                    <option>2011</option>\n                    <option>2010</option>\n                    <option>2009</option>\n                </select>\n            </div>\n            <div class=\"form-group condition\" data-value=\"{condition}\">\n                <label>Condition</label>\n\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"condition\" value=\"brandnew\" checked>Brand New\n                    </label>\n                </div>\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"condition\" value=\"unregistered\">Unregistered\n                    </label>\n                </div>\n                <div class=\"radio disabled\">\n                    <label>\n                        <input type=\"radio\" name=\"condition\" value=\"used\">Used\n                    </label>\n                </div>\n            </div>\n            <div class=\"form-group transmission\" data-value=\"{transmission}\">\n                <label>Transmission</label>\n\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"transmission\" value=\"automatic\" checked>Automatic\n                    </label>\n                </div>\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"transmission\" value=\"manual\">Manual\n                    </label>\n                </div>\n                <div class=\"radio disabled\">\n                    <label>\n                        <input type=\"radio\" name=\"transmission\" value=\"manumatic\">Manumatic\n                    </label>\n                </div>\n            </div>\n            <div class=\"form-group fuel\" data-value=\"{fuel}\">\n                <label>Fuel</label>\n\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"fuel\" value=\"petrol\" checked>Petrol\n                    </label>\n                </div>\n                <div class=\"radio\">\n                    <label>\n                        <input type=\"radio\" name=\"fuel\" value=\"diesel\">Diesel\n                    </label>\n                </div>\n                <div class=\"radio disabled\">\n                    <label>\n                        <input type=\"radio\" name=\"fuel\" value=\"hybrid\">Hybrid\n                    </label>\n                </div>\n            </div>\n            <div class=\"form-group color\">\n                <label>Color</label>\n                <input type=\"text\" class=\"form-control\" placeholder=\"Color\" value=\"{color}\">\n            </div>\n            <div class=\"form-group mileage\">\n                <label>Mileage</label>\n                <input type=\"text\" class=\"form-control\" placeholder=\"Mileage\" value=\"{mileage}\">\n            </div>\n            <div class=\"form-group price\">\n                <label>Price</label>\n                <input type=\"text\" class=\"form-control\" placeholder=\"Minimum\" value=\"{price}\">\n            </div>\n            <div class=\"form-group description\">\n                <label>Description</label>\n                <textarea class=\"form-control\" rows=\"6\">{description}</textarea>\n            </div>\n            <div class=\"form-group photos\">\n                <span class=\"btn btn-success fileinput-button upload-button\">\n                    <i class=\"glyphicon glyphicon-plus\"></i>\n                    <span> Select Images...</span>\n                    <input type=\"file\" multiple=\"\" name=\"files[]\" class=\"fileupload\">\n                </span>\n\n                <!--<div id=\"progress\" class=\"progress\">\n                    <div class=\"progress-bar progress-bar-success\"></div>\n                </div>-->\n                <div class=\"files row\">\n                    {#_.update}\n                    {#photos}\n                    <div class=\"col-md-3 file\">\n                        {>\"vehicles-create-preview\"/}\n                    </div>\n                    {/photos}\n                    {/_.update}\n                </div>\n            </div>\n            {/.}\n            <div class=\"form-group\">\n                <button type=\"button\" class=\"btn btn-default add\">{?_.update}Save{:else}Add{/_.update}</button>\n                {?_.update}\n                <button type=\"button\" class=\"btn btn-default delete\">Delete</button>\n                {/_.update}\n            </div>\n        </form>\n    </div>\n</div>");
 
-require.define("serandomps~vehicles-add@master/preview.html", "<div class=\"info row\">\n    <div class=\"col-md-6 col-xs-6 filename\"></div>\n    <div class=\"col-md-6 col-xs-6\">\n        <button class=\"btn btn-default btn-xs pull-right remove-file existing\"\n                type=\"button\" data-id=\"{id}\" data-index=\"{?index}{index}{:else}0{/index}\">\n            <span aria-hidden=\"true\" class=\"glyphicon glyphicon-remove\"></span>\n        </button>\n    </div>\n</div>\n<div class=\"thumbnail\">\n    {?url}\n    <img src=\"{url}\"/>\n    {/url}\n</div>");
+require.define("serandomps~vehicles-create@master/preview.html", "<div class=\"info row\">\n    <div class=\"col-md-6 col-xs-6 filename\"></div>\n    <div class=\"col-md-6 col-xs-6\">\n        <button class=\"btn btn-default btn-xs pull-right remove-file existing\"\n                type=\"button\" data-id=\"{id}\" data-index=\"{?index}{index}{:else}0{/index}\">\n            <span aria-hidden=\"true\" class=\"glyphicon glyphicon-remove\"></span>\n        </button>\n    </div>\n</div>\n<div class=\"thumbnail\">\n    {?url}\n    <img src=\"{url}\"/>\n    {/url}\n</div>");
 
 require.register("serandomps~gallery@master", function (exports, module) {
 !function (a) {
@@ -8164,7 +8164,7 @@ require.register("serandomps~gallery@master", function (exports, module) {
 });
 });
 
-require.register("serandomps~vehicles-details@master", function (exports, module) {
+require.register("serandomps~vehicles-findone@master", function (exports, module) {
 var dust = require('serandomps~dust@master')();
 var serand = require('serandomps~serand@master');
 var utils = require('serandomps~autos-utils@master');
@@ -8173,7 +8173,7 @@ require('serandomps~gallery@master');
 
 var user;
 
-dust.loadSource(dust.compile(require('serandomps~vehicles-details@master/template.html'), 'vehicles-details'));
+dust.loadSource(dust.compile(require('serandomps~vehicles-findone@master/template.html'), 'vehicles-findone'));
 
 module.exports = function (sandbox, fn, options) {
     $.ajax({
@@ -8183,14 +8183,14 @@ module.exports = function (sandbox, fn, options) {
         },
         dataType: 'json',
         success: function (data) {
-            dust.render('vehicles-details', utils.cdn800x450(data), function (err, out) {
+            dust.render('vehicles-findone', utils.cdn800x450(data), function (err, out) {
                 sandbox.append(out);
                 if (!fn) {
                     return;
                 }
                 fn(false, {
                     clean: function () {
-                        $('.vehicles-details', sandbox).remove();
+                        $('.vehicles-findone', sandbox).remove();
                     },
                     done: function () {
                         var i;
@@ -8232,9 +8232,9 @@ serand.on('user', 'logged out', function (usr) {
 
 });
 
-require.define("serandomps~vehicles-details@master/template.html", "<div class=\"vehicles-details row\">\n    <div class=\"col-md-6\">\n        <div class=\"blueimp-gallery blueimp-gallery-carousel\">\n            <div class=\"slides\"></div>\n            <h3 class=\"title\"></h3>\n            <a class=\"prev\">‹</a>\n            <a class=\"next\">›</a>\n            <a class=\"play-pause\"></a>\n            <ol class=\"indicator\"></ol>\n        </div>\n    </div>\n    <div class=\"col-md-6\">\n        <table class=\"table table-striped table-bordered\">\n            <tbody>\n            <tr>\n                <td>Make</td>\n                <td>{make}</td>\n            </tr>\n            <tr>\n                <td>Model</td>\n                <td>{model}</td>\n            </tr>\n            <tr>\n                <td>Year</td>\n                <td>{year}</td>\n            </tr>\n            <tr>\n                <td>Color</td>\n                <td>{color}</td>\n            </tr>\n            <tr>\n                <td>Condition</td>\n                <td>{condition}</td>\n            </tr>\n            <tr>\n                <td>Mileage</td>\n                <td>{mileage}</td>\n            </tr>\n            <tr>\n                <td>Transmission</td>\n                <td>{transmission}</td>\n            </tr>\n            <tr>\n                <td>Price</td>\n                <td>{price}</td>\n            </tr>\n            <tr>\n                <td>Description</td>\n                <td>{description}</td>\n            </tr>\n            </tbody>\n        </table>\n    </div>\n</div>");
+require.define("serandomps~vehicles-findone@master/template.html", "<div class=\"vehicles-findone row\">\n    <div class=\"col-md-6\">\n        <div class=\"blueimp-gallery blueimp-gallery-carousel\">\n            <div class=\"slides\"></div>\n            <h3 class=\"title\"></h3>\n            <a class=\"prev\">‹</a>\n            <a class=\"next\">›</a>\n            <a class=\"play-pause\"></a>\n            <ol class=\"indicator\"></ol>\n        </div>\n    </div>\n    <div class=\"col-md-6\">\n        <table class=\"table table-striped table-bordered\">\n            <tbody>\n            <tr>\n                <td>Make</td>\n                <td>{make}</td>\n            </tr>\n            <tr>\n                <td>Model</td>\n                <td>{model}</td>\n            </tr>\n            <tr>\n                <td>Year</td>\n                <td>{year}</td>\n            </tr>\n            <tr>\n                <td>Color</td>\n                <td>{color}</td>\n            </tr>\n            <tr>\n                <td>Condition</td>\n                <td>{condition}</td>\n            </tr>\n            <tr>\n                <td>Mileage</td>\n                <td>{mileage}</td>\n            </tr>\n            <tr>\n                <td>Transmission</td>\n                <td>{transmission}</td>\n            </tr>\n            <tr>\n                <td>Price</td>\n                <td>{price}</td>\n            </tr>\n            <tr>\n                <td>Description</td>\n                <td>{description}</td>\n            </tr>\n            </tbody>\n        </table>\n    </div>\n</div>");
 
-require.register("serandomps~vehicles-listing@master", function (exports, module) {
+require.register("serandomps~vehicles-find@master", function (exports, module) {
 var dust = require('serandomps~dust@master')();
 var serand = require('serandomps~serand@master');
 var utils = require('serandomps~autos-utils@master');
@@ -8265,8 +8265,8 @@ var list = function (el, options, fn) {
         },
         dataType: 'json',
         success: function (data) {
-            dust.render('vehicles-listing', utils.cdn288x162(data), function (err, out) {
-                $('.vehicles-listing', el).remove();
+            dust.render('vehicles-find', utils.cdn288x162(data), function (err, out) {
+                $('.vehicles-find', el).remove();
                 el.off('click', '.auto-sort .btn');
                 el.append(out);
                 el.on('click', '.auto-sort .btn', function () {
@@ -8285,7 +8285,7 @@ var list = function (el, options, fn) {
                     return;
                 }
                 fn(false, function () {
-                    $('.vehicles-listing', el).remove();
+                    $('.vehicles-find', el).remove();
                 });
             });
         },
@@ -8297,7 +8297,7 @@ var list = function (el, options, fn) {
     });
 };
 
-dust.loadSource(dust.compile(require('serandomps~vehicles-listing@master/template.html'), 'vehicles-listing'));
+dust.loadSource(dust.compile(require('serandomps~vehicles-find@master/template.html'), 'vehicles-find'));
 
 module.exports = function (sandbox, fn, options) {
     list(sandbox, options, fn);
@@ -8317,7 +8317,7 @@ serand.on('user', 'logged out', function (usr) {
 
 });
 
-require.define("serandomps~vehicles-listing@master/template.html", "<div class=\"vehicles-listing\">\n    <!--<div class=\"row\">\n        <div class=\"col-md-7\"></div>\n        <div class=\"col-md-5\">\n            <div class=\"row auto-sort\">\n                <button type=\"button\" class=\"btn btn-primary\" name=\"year\">Year</button>\n                <button type=\"button\" class=\"btn btn-success\" name=\"price\">Price</button>\n                <button type=\"button\" class=\"btn btn-info\" name=\"recent\">Recent</button>\n                <button type=\"button\" class=\"btn btn-warning\" name=\"popular\">Popular</button>\n            </div>\n        </div>\n    </div>-->\n\n    {@slice size=\"3\"}\n    <div class=\"row\">\n        {#.}\n        <div class=\"col-md-4 col-sm-6\">\n            <a class=\"thumbnail\" href=\"/vehicles/{id}\">\n                <div class=\"edit\">Edit</div>\n                <div class=\"photo\"><img src=\"{photos[0].url}\"/></div>\n                <div class=\"info\">\n                    <div class=\"row\">\n                        <div class=\"col-md-12 first\">\n                            <h4>{make} {model} <small>{year}</small></h4>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-md-6 pull-left\">\n                            <div class=\"third\"><h6>{price} LKR</h6></div>\n                        </div>\n                        <div class=\"col-md-6 pull-left\">\n                            <div class=\"third\"><h6>{mileage} km</h6></div>\n                        </div>\n                    </div>\n                    <!--<table class=\"table table-condensed\">\n                        &lt;!&ndash;<tr><td class=\"name\">Price</td><td class=\"value\">10000LKR</td></tr>&ndash;&gt;\n                        <tr>\n                            <td class=\"name\">Model</td>\n                            <td class=\"value\">{make} {model}</td>\n                        </tr>\n                        &lt;!&ndash;<tr>\n                            <td class=\"name\">Year</td>\n                            <td class=\"value\">{year}</td>\n                        </tr>\n                        <tr>\n                            <td class=\"name\">Color</td>\n                            <td class=\"value\">{color}</td>\n                        </tr>\n                        <tr>\n                            <td class=\"name\">Mileage</td>\n                            <td class=\"value\">{mileage}</td>\n                        </tr>\n                        <tr>\n                            <td class=\"name\"><a href=\"/vehicles/{id}/edit\">Edit here</a></td>\n                            <td class=\"value\"></td>\n                        </tr>&ndash;&gt;\n                        &lt;!&ndash;<tr><td class=\"name\">Transmission</td><td class=\"value\">Automatic</td></tr>&ndash;&gt;\n                        &lt;!&ndash;<tr><td class=\"name\">Fuel</td><td class=\"value\">Gasoline</td></tr>&ndash;&gt;\n                    </table>-->\n                </div>\n            </a>\n        </div>\n        {/.}\n    </div>\n    {/slice}\n</div>");
+require.define("serandomps~vehicles-find@master/template.html", "<div class=\"vehicles-find\">\n    <!--<div class=\"row\">\n        <div class=\"col-md-7\"></div>\n        <div class=\"col-md-5\">\n            <div class=\"row auto-sort\">\n                <button type=\"button\" class=\"btn btn-primary\" name=\"year\">Year</button>\n                <button type=\"button\" class=\"btn btn-success\" name=\"price\">Price</button>\n                <button type=\"button\" class=\"btn btn-info\" name=\"recent\">Recent</button>\n                <button type=\"button\" class=\"btn btn-warning\" name=\"popular\">Popular</button>\n            </div>\n        </div>\n    </div>-->\n\n    {@slice size=\"3\"}\n    <div class=\"row\">\n        {#.}\n        <div class=\"col-md-4 col-sm-6\">\n            <a class=\"thumbnail\" href=\"/vehicles/{id}\">\n                <div class=\"edit\">Edit</div>\n                <div class=\"photo\"><img src=\"{photos[0].url}\"/></div>\n                <div class=\"info\">\n                    <div class=\"row\">\n                        <div class=\"col-md-12 first\">\n                            <h4>{make} {model} <small>{year}</small></h4>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-md-6 pull-left\">\n                            <div class=\"third\"><h6>{price} LKR</h6></div>\n                        </div>\n                        <div class=\"col-md-6 pull-left\">\n                            <div class=\"third\"><h6>{mileage} km</h6></div>\n                        </div>\n                    </div>\n                    <!--<table class=\"table table-condensed\">\n                        &lt;!&ndash;<tr><td class=\"name\">Price</td><td class=\"value\">10000LKR</td></tr>&ndash;&gt;\n                        <tr>\n                            <td class=\"name\">Model</td>\n                            <td class=\"value\">{make} {model}</td>\n                        </tr>\n                        &lt;!&ndash;<tr>\n                            <td class=\"name\">Year</td>\n                            <td class=\"value\">{year}</td>\n                        </tr>\n                        <tr>\n                            <td class=\"name\">Color</td>\n                            <td class=\"value\">{color}</td>\n                        </tr>\n                        <tr>\n                            <td class=\"name\">Mileage</td>\n                            <td class=\"value\">{mileage}</td>\n                        </tr>\n                        <tr>\n                            <td class=\"name\"><a href=\"/vehicles/{id}/edit\">Edit here</a></td>\n                            <td class=\"value\"></td>\n                        </tr>&ndash;&gt;\n                        &lt;!&ndash;<tr><td class=\"name\">Transmission</td><td class=\"value\">Automatic</td></tr>&ndash;&gt;\n                        &lt;!&ndash;<tr><td class=\"name\">Fuel</td><td class=\"value\">Gasoline</td></tr>&ndash;&gt;\n                    </table>-->\n                </div>\n            </a>\n        </div>\n        {/.}\n    </div>\n    {/slice}\n</div>");
 
 require.register("serandomps~vehicles-search@master", function (exports, module) {
 var dust = require('serandomps~dust@master')();
@@ -11778,7 +11778,7 @@ page('/vehicles', function (ctx) {
         .area('#right')
         .add('vehicles-search', ctx.query)
         .area('#middle')
-        .add('vehicles-listing', ctx.query)
+        .add('vehicles-find', ctx.query)
         .render();
 });
 
@@ -11788,7 +11788,7 @@ page('/vehicles/:id', can('vehicle:read'), function (ctx) {
         .add('accounts-navigation')
         .add('breadcrumb')
         .area('#middle')
-        .add('vehicles-details', {
+        .add('vehicles-findone', {
             id: ctx.params.id
         })
         .render();
@@ -11800,7 +11800,7 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
         .add('accounts-navigation')
         .add('breadcrumb')
         .area('#middle')
-        .add('vehicles-add', {
+        .add('vehicles-create', {
             id: ctx.params.id
         })
         .render();
@@ -11811,7 +11811,7 @@ page('/add', can('vehicle:create'), function (ctx) {
         .area('#header')
         .add('accounts-navigation')
         .area('#middle')
-        .add('vehicles-add', {})
+        .add('vehicles-create', {})
         .render();
 });
 
@@ -11915,7 +11915,7 @@ module.exports.already = function (ctx, next) {
 };
 });
 
-require.define("accounts/component.json", "{\n    \"name\": \"accounts\",\n    \"description\": \"accounts\",\n    \"dependencies\": {\n        \"visionmedia/page.js\": \"*\",\n        \"serandomps/async\": \"master\",\n        \"serandomps/dust\": \"master\",\n        \"serandomps/serand\": \"master\",\n        \"serandomps/user\": \"master\",\n        \"serandomps/token\": \"master\",\n        \"serandomps/vehicles-add\": \"master\",\n        \"serandomps/vehicles-details\": \"master\",\n        \"serandomps/vehicles-listing\": \"master\",\n        \"serandomps/vehicles-search\": \"master\",\n        \"serandomps/breadcrumb\": \"master\",\n        \"serandomps/navigation\": \"master\",\n        \"serandomps/accounts-home\": \"master\",\n        \"serandomps/accounts-navigation\": \"master\",\n        \"serandomps/accounts-signup\": \"master\",\n        \"serandomps/accounts-signin\": \"master\",\n        \"serandomps/accounts-token\": \"master\",\n        \"serandomps/accounts-profile\": \"master\",\n        \"serandomps/accounts-authorize\": \"master\",\n        \"serandomps/accounts-authorized\": \"master\",\n        \"serandomps/upload\": \"master\"\n    },\n    \"scripts\": [\"boot.js\", \"controllers/signin.js\"],\n    \"styles\": [\"nunito.css\", \"oxygen.css\", \"boot.css\"],\n    \"templates\": [\"component.json\", \"one-column.html\", \"two-column.html\", \"three-column.html\"],\n    \"images\": [\n        \"images/logo.png\",\n        \"images/logo@2x.png\"\n    ],\n    \"files\": [\"index.html\"],\n    \"main\": \"boot.js\"\n}\n");
+require.define("accounts/component.json", "{\n    \"name\": \"accounts\",\n    \"description\": \"accounts\",\n    \"dependencies\": {\n        \"visionmedia/page.js\": \"*\",\n        \"serandomps/async\": \"master\",\n        \"serandomps/dust\": \"master\",\n        \"serandomps/serand\": \"master\",\n        \"serandomps/user\": \"master\",\n        \"serandomps/token\": \"master\",\n        \"serandomps/vehicles-create\": \"master\",\n        \"serandomps/vehicles-findone\": \"master\",\n        \"serandomps/vehicles-find\": \"master\",\n        \"serandomps/vehicles-search\": \"master\",\n        \"serandomps/breadcrumb\": \"master\",\n        \"serandomps/navigation\": \"master\",\n        \"serandomps/accounts-home\": \"master\",\n        \"serandomps/accounts-navigation\": \"master\",\n        \"serandomps/accounts-signup\": \"master\",\n        \"serandomps/accounts-signin\": \"master\",\n        \"serandomps/accounts-token\": \"master\",\n        \"serandomps/accounts-profile\": \"master\",\n        \"serandomps/accounts-authorize\": \"master\",\n        \"serandomps/accounts-authorized\": \"master\",\n        \"serandomps/upload\": \"master\"\n    },\n    \"scripts\": [\"boot.js\", \"controllers/signin.js\"],\n    \"styles\": [\"nunito.css\", \"oxygen.css\", \"boot.css\"],\n    \"templates\": [\"component.json\", \"one-column.html\", \"two-column.html\", \"three-column.html\"],\n    \"images\": [\n        \"images/logo.png\",\n        \"images/logo@2x.png\"\n    ],\n    \"files\": [\"index.html\"],\n    \"main\": \"boot.js\"\n}\n");
 
 require.define("accounts/one-column.html", "<div class=\"two-column\">\n    <div class=\"container clearfix\">\n        <div id=\"header\"></div>\n        <div id=\"middle\">\n        </div>\n    </div>\n</div>");
 
