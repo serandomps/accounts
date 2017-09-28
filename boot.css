@@ -34,10 +34,6 @@ a:active, a:hover {
     font-weight: normal;
 }
 
-.form-group {
-    margin-bottom: 0;
-}
-
 .form-group .options * {
     font-weight: normal;
 }

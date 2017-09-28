@@ -1,5 +1,3 @@
-var dust = require('dust')();
-
 var serand = require('serand');
 var page = serand.page;
 var redirect = serand.redirect;
