@@ -1,0 +1,20 @@
+{
+  "name": "path-to-regexp",
+  "description": "Express style path to RegExp utility",
+  "version": "1.2.1",
+  "keywords": [
+    "express",
+    "regexp",
+    "route",
+    "routing"
+  ],
+  "scripts": [
+    "index.js"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "juliangruber/isarray": "0.0.1"
+  },
+  "repository": "pillarjs/path-to-regexp",
+  "resolved": "7a3361bf5d38098e0cb3c072878bc5535aeab739"
+}
