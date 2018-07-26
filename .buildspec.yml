@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      - git clone https://github.com/serandules/deploy.git .deploy
+      - cd .deploy; npm install; cd ..
+      - ./.deploy/components ${NAME} ${REVISION}
+      - echo Build completed on `date`
