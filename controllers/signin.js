@@ -35,7 +35,11 @@ module.exports.already = function (ctx, next) {
     var clientId = ctx.query.client_id;
     if (!clientId) {
         serand.emit('user', 'authenticator', function (err, uri) {
-            redirect(uri.substring(base.length));
+            if (err) {
+                return console.error(err);
+            }
+            uri = '/' + uri.substring(base.length);
+            redirect(uri);
         });
         return;
     }

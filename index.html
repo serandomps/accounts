@@ -11,6 +11,7 @@
 <div id="content"
      data-server="{server}"
      data-cdn="{cdn}"
+     data-captcha-key="{captchaKey}"
      data-code="{code}"
      data-error="{error}"
      data-error-code="{errorCode}">
@@ -19,6 +20,7 @@
 <script src="{cdn}/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="{cdn}/jquery.fs.selecter/3.0.15/jquery.fs.selecter.js"></script>
 <script src="{cdn}/fontawesome/5.0.2/fontawesome.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=serand_captcha_ready&render=explicit" async defer></script>
 <script src="{cdn}/accounts/{version}/index.js"></script>
 </body>
 </html>

@@ -35,7 +35,10 @@ page('/signin', signin.already, function (ctx) {
         .area('#header')
         .add('home', {title: 'Welcome to serandives.com'})
         .area('#middle')
-        .add('accounts-signin', ctx.options)
+        .add('accounts-signin', {
+            clientId: ctx.query.client_id,
+            location: ctx.query.redirect_uri
+        })
         .render();
 });
 
@@ -57,9 +60,12 @@ page('/auth/oauth', function (ctx) {
 page('/signup', function (ctx) {
     layout('one-column')
         .area('#header')
-        .add('accounts-navigation')
+        .add('home', {title: 'Welcome to serandives.com'})
         .area('#middle')
-        .add('accounts-signup')
+        .add('accounts-signup', {
+            clientId: ctx.query.client_id,
+            location: ctx.query.redirect_uri
+        })
         .render();
 });
 
@@ -78,51 +84,6 @@ page('/authorized', function (ctx) {
         .add('accounts-navigation')
         .area('#middle')
         .add('accounts-authorized', ctx.state)
-        .render();
-});
-
-page('/vehicles', function (ctx) {
-    layout('two-column')
-        .area('#header')
-        .add('accounts-navigation')
-        .add('breadcrumb')
-        .area('#right')
-        .add('vehicles-search', ctx.query)
-        .area('#middle')
-        .add('vehicles-find', ctx.query)
-        .render();
-});
-
-page('/vehicles/:id', can('vehicle:read'), function (ctx) {
-    layout('one-column')
-        .area('#header')
-        .add('accounts-navigation')
-        .add('breadcrumb')
-        .area('#middle')
-        .add('vehicles-findone', {
-            id: ctx.params.id
-        })
-        .render();
-});
-
-page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
-    layout('one-column')
-        .area('#header')
-        .add('accounts-navigation')
-        .add('breadcrumb')
-        .area('#middle')
-        .add('vehicles-create', {
-            id: ctx.params.id
-        })
-        .render();
-});
-
-page('/add', can('vehicle:create'), function (ctx) {
-    layout('one-column')
-        .area('#header')
-        .add('accounts-navigation')
-        .area('#middle')
-        .add('vehicles-create', {})
         .render();
 });
 
