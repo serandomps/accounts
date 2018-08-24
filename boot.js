@@ -1,4 +1,5 @@
 var serand = require('serand');
+var utils = require('utils');
 var page = serand.page;
 var redirect = serand.redirect;
 
@@ -20,24 +21,26 @@ var can = function (permission) {
     };
 };
 
-page('/', function (ctx) {
+page('/', signin.force, function (ctx) {
     layout('one-column')
         .area('#header')
         .add('accounts-navigation')
-        .add('breadcrumb')
         .area('#middle')
         .add('accounts-home')
         .render();
 });
 
 page('/signin', signin.already, function (ctx) {
+    var clientId = ctx.query.client_id;
+    var location = ctx.query.redirect_uri;
+    location = location || utils.resolve('accounts:///auth');
     layout('one-column')
         .area('#header')
         .add('home', {title: 'Welcome to serandives.com'})
         .area('#middle')
         .add('accounts-signin', {
-            clientId: ctx.query.client_id,
-            location: ctx.query.redirect_uri
+            clientId: clientId,
+            location: location
         })
         .render();
 });
@@ -55,6 +58,21 @@ page('/auth/oauth', function (ctx) {
           errorCode: el.data('errorCode')
       })
       .render();
+});
+
+page('/auth', function (ctx) {
+    var el = $('#content');
+    var usr = {
+        tid: el.data('tid'),
+        username: el.data('username'),
+        access: el.data('access'),
+        expires: el.data('expires'),
+        refresh: el.data('refresh')
+    }
+    if (usr.username) {
+        return serand.emit('user', 'logged in', usr);
+    }
+    serand.emit('user', 'logged out');
 });
 
 page('/signup', function (ctx) {
@@ -89,7 +107,7 @@ page('/authorized', function (ctx) {
 
 serand.on('user', 'login', function (path) {
     dest = path;
-    serand.emit('user', 'authenticator', {location: dest}, function (err, uri) {
+    serand.emit('user', 'authenticator', {type: 'serandives', location: dest}, function (err, uri) {
         redirect(uri);
     });
 });
