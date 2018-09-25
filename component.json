@@ -22,14 +22,29 @@
         "serandomps/accounts-authorized": "master",
         "serandomps/upload": "master"
     },
-    "scripts": ["boot.js", "controllers/signin.js"],
-    "styles": ["nunito.css", "oxygen.css", "boot.css", "theme.css"],
-    "templates": ["component.json", "one-column.html", "two-column.html", "three-column.html"],
+    "scripts": [
+        "boot.js",
+        "controllers/auth.js"
+    ],
+    "styles": [
+        "nunito.css",
+        "oxygen.css",
+        "boot.css",
+        "theme.css"
+    ],
+    "templates": [
+        "component.json",
+        "layouts/one-column.html",
+        "layouts/two-column.html",
+        "layouts/three-column.html"
+    ],
     "images": [
         "images/logo.png",
         "images/logo@2x.png",
         "images/*"
     ],
-    "files": ["index.html"],
+    "files": [
+        "index.html"
+    ],
     "main": "boot.js"
 }
