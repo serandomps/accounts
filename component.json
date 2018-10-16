@@ -20,6 +20,7 @@
         "serandomps/accounts-profile": "master",
         "serandomps/accounts-authorize": "master",
         "serandomps/accounts-authorized": "master",
+        "serandomps/vehicles-create": "master",
         "serandomps/upload": "master"
     },
     "scripts": [
