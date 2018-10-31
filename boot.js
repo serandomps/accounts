@@ -45,10 +45,10 @@ page('/auth/oauth', function (ctx, next) {
       .add('accounts-navigation')
       .area('#middle')
       .add('accounts-token', {
-          scope: el.data('scope'),
-          code: el.data('code'),
-          error: el.data('error'),
-          errorCode: el.data('errorCode')
+          scope: sera.scope,
+          code: sera.code,
+          error: sera.error,
+          errorCode: sera.errorCode
       })
       .render(ctx, next);
 });
