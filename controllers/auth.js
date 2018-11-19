@@ -1,23 +1,24 @@
 var serand = require('serand');
 var utils = require('utils');
+var auth = require('auth');
 var direct = serand.direct;
 
-var base = utils.resolve('accounts:///');
+var base = utils.resolve('accounts://');
 
 module.exports.signin = function (ctx, next) {
     var clientId = ctx.query.client_id;
     var location = ctx.query.redirect_uri
     if (!clientId || !location) {
-        serand.emit('user', 'authenticator', {
+        auth.authenticator({
             type: 'serandives',
             location: location || utils.resolve('accounts:///auth')
         }, function (err, uri) {
             if (err) {
-                return console.error(err);
+                return next(err);
             }
-            uri = '/' + uri.substring(base.length);
+            uri = uri.substring(base.length);
             direct(uri);
-        });
+        })
         return;
     }
     if (ctx.user) {
@@ -40,6 +41,10 @@ module.exports.force = function (ctx, next) {
         return next();
     }
     var path = ctx.path;
+    var self = utils.resolve('accounts://');
+    if (path.indexOf(self) === 0) {
+        path = path.substring(self.length);
+    }
     serand.store('state', {
         path: path
     });

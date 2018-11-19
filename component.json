@@ -6,6 +6,7 @@
         "serandomps/async": "master",
         "serandomps/dust": "master",
         "serandomps/serand": "master",
+        "serandomps/auth": "master",
         "serandomps/user": "master",
         "serandomps/utils": "master",
         "serandomps/token": "master",
