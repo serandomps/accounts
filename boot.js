@@ -29,11 +29,54 @@ page('/signin', auth.signin, function (ctx, next) {
     location = location || utils.resolve('accounts:///auth');
     layout('one-column')
         .area('#header')
-        .add('home', {title: 'Welcome to serandives.com'})
+        .add('accounts-navigation')
         .area('#middle')
         .add('accounts-signin', {
             clientId: clientId,
             location: location
+        })
+        .render(ctx, next);
+});
+
+page('/recover', function (ctx, next) {
+    var clientId = ctx.query.client_id;
+    var location = ctx.query.redirect_uri;
+    location = location || utils.resolve('accounts:///auth');
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('accounts-recover', {
+            clientId: clientId,
+            location: location
+        })
+        .render(ctx, next);
+});
+
+page('/recovered', function (ctx, next) {
+    var email = ctx.query.email;
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('accounts-recovered', {
+            email: email
+        })
+        .render(ctx, next);
+});
+
+page('/reset', function (ctx, next) {
+    var user = ctx.query.user;
+    var email = ctx.query.email;
+    var otp = ctx.query.otp;
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('accounts-reset', {
+            user: user,
+            email: email,
+            otp: otp
         })
         .render(ctx, next);
 });

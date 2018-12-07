@@ -17,6 +17,9 @@
         "serandomps/accounts-navigation": "master",
         "serandomps/accounts-signup": "master",
         "serandomps/accounts-signin": "master",
+        "serandomps/accounts-recover": "master",
+        "serandomps/accounts-recovered": "master",
+        "serandomps/accounts-reset": "master",
         "serandomps/accounts-token": "master",
         "serandomps/accounts-profile": "master",
         "serandomps/accounts-authorize": "master",
@@ -29,10 +32,7 @@
         "controllers/auth.js"
     ],
     "styles": [
-        "nunito.css",
-        "oxygen.css",
-        "boot.css",
-        "theme.css"
+        "boot.css"
     ],
     "templates": [
         "component.json",

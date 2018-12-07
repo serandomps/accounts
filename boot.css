@@ -3,55 +3,25 @@
     padding-top: 70px;
 }
 
-.single-column {
+.one-column {
     padding-bottom: 30px;
     padding-top: 70px;
 }
 
-body, h1, h2, h3, h4, h5, h6 {
-    /*background-color: #2F2F2F;*/
-    font-family: "Oxygen", Helvetica, Arial, sans-serif;
+body {
+    font-family: 'Oxygen', sans-serif;
 }
 
-a:active, a:hover {
-    outline: 0 none;
+.hidden {
+    display: none;
 }
 
-:focus, *:hover, *:active {
-    outline: medium none;
+.login .facebook {
+    color: #3b5998;
+    background: rgba(59, 89, 152, 0.1);
 }
 
-.selecter {
-    max-width: 100%;
-}
-
-/*.form-group label {
-    max-width: 100%;
-    width: 100%;
-}*/
-
-.form-group label * {
-    font-weight: normal;
-}
-
-.form-group .options * {
-    font-weight: normal;
-}
-
-form, .form-control {
-    font-size: 13px;
-}
-
-.radio, .checkbox {
-    margin-bottom: 5px;
-    margin-top: 5px;
-}
-
-form label {
-    margin-bottom: 0;
-    margin-top: 3px;
-}
-
-select.form-control {
-    width: auto;
+.login .google {
+    color: #d14130;
+    background: rgba(209, 65, 48, 0.1);
 }
