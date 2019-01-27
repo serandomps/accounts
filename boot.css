@@ -8,14 +8,6 @@
     padding-top: 70px;
 }
 
-body {
-    font-family: 'Oxygen', sans-serif;
-}
-
-.hidden {
-    display: none;
-}
-
 .login .facebook {
     color: #3b5998;
     background: rgba(59, 89, 152, 0.1);
