@@ -25,7 +25,12 @@
         "serandomps/accounts-profile": "master",
         "serandomps/accounts-authorize": "master",
         "serandomps/accounts-authorized": "master",
-        "serandomps/vehicles-create": "master",
+        "serandomps/contacts-create": "master",
+        "serandomps/contacts-find": "master",
+        "serandomps/contacts-remove": "master",
+        "serandomps/locations-create": "master",
+        "serandomps/locations-find": "master",
+        "serandomps/locations-remove": "master",
         "serandomps/upload": "master"
     },
     "scripts": [

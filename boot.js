@@ -1,7 +1,9 @@
+var dust = require('dust')();
+
 var serand = require('serand');
 var utils = require('utils');
 var page = serand.page;
-var direct = serand.direct;
+var redirect = serand.redirect;
 
 var app = serand.app({
     self: 'accounts',
@@ -126,7 +128,7 @@ page(auth.force);
 
 page('/auth', function (ctx, next) {
     var state = serand.store('state');
-    state ? direct(state.path) : direct('/');
+    state ? redirect(state.path) : redirect('/');
 });
 
 page('/', function (ctx, next) {
@@ -165,34 +167,106 @@ page('/profile', function (ctx, next) {
         .render(ctx, next);
 });
 
+page('/create-contacts', function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('contacts-create', {title: 'Create Contacts'})
+        .render(ctx, next);
+});
+
+page('/contacts/:id/edit', function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('contacts-create', {id: ctx.params.id})
+        .render(ctx, next);
+});
+
+page('/contacts/:id/delete', function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('contacts-remove', {id: ctx.params.id})
+        .render(ctx, next);
+});
+
+page('/contacts', function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('contacts-find', {title: 'Manage Contacts'})
+        .render(ctx, next);
+});
+
+page('/create-locations', function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('locations-create', {title: 'Create Locations'})
+        .render(ctx, next);
+});
+
+page('/locations/:id/edit', function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('locations-create', {id: ctx.params.id})
+        .render(ctx, next);
+});
+
+page('/locations/:id/delete', function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('locations-remove', {id: ctx.params.id})
+        .render(ctx, next);
+});
+
+page('/locations', function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-navigation')
+        .area('#middle')
+        .add('locations-find', {title: 'Manage Locations'})
+        .render(ctx, next);
+});
+
 serand.on('user', 'login', function (path) {
     dest = path;
     serand.emit('user', 'authenticator', {type: 'serandives', location: dest}, function (err, uri) {
-        direct(uri);
+        redirect(uri);
     });
 });
 
 serand.on('user', 'logged in', function (usr, options) {
     options = options || {};
     if (!options.location) {
-        return direct('/');
+        return redirect('/');
     }
     var self = utils.resolve('accounts:///auth');
     if (options.location === self) {
-        return direct('/auth');
+        return redirect('/auth');
     }
-    direct('/authorize', {
+    redirect('/authorize', null,{
         user: usr,
         options: options
     });
 });
 
 serand.on('user', 'authorized', function (options) {
-    direct('/authorized', options);
+    redirect('/authorized', null, options);
 });
 
 serand.on('user', 'logged out', function (usr) {
-    direct('/');
+    redirect('/');
 });
 
 serand.emit('serand', 'ready');

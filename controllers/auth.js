@@ -1,7 +1,7 @@
 var serand = require('serand');
 var utils = require('utils');
 var auth = require('auth');
-var direct = serand.direct;
+var redirect = serand.redirect;
 
 var base = utils.resolve('accounts://');
 
@@ -17,12 +17,12 @@ module.exports.signin = function (ctx, next) {
                 return next(err);
             }
             uri = uri.substring(base.length);
-            direct(uri);
+            redirect(uri);
         })
         return;
     }
     if (ctx.user) {
-        direct('/authorize', {
+        redirect('/authorize', null, {
             user: ctx.user,
             options: {
                 clientId: clientId,
@@ -48,5 +48,5 @@ module.exports.force = function (ctx, next) {
     serand.store('state', {
         path: path
     });
-    direct('/signin');
+    redirect('/signin');
 };
