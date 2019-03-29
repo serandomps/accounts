@@ -6,39 +6,28 @@
         "serandomps/async": "master",
         "serandomps/dust": "master",
         "serandomps/serand": "master",
+        "serandomps/accounts-client": "master",
         "serandomps/auth": "master",
         "serandomps/user": "master",
         "serandomps/utils": "master",
         "serandomps/token": "master",
         "serandomps/home": "master",
+        "serandomps/captcha": "master",
+        "serandomps/form": "master",
+        "serandomps/validators": "master",
         "serandomps/breadcrumb": "master",
         "serandomps/navigation": "master",
-        "serandomps/accounts-home": "master",
-        "serandomps/accounts-navigation": "master",
-        "serandomps/accounts-signup": "master",
-        "serandomps/accounts-confirm": "master",
-        "serandomps/accounts-signin": "master",
-        "serandomps/accounts-recover": "master",
-        "serandomps/accounts-recovered": "master",
-        "serandomps/accounts-reset": "master",
-        "serandomps/accounts-token": "master",
-        "serandomps/accounts-profile": "master",
-        "serandomps/accounts-authorize": "master",
-        "serandomps/accounts-authorized": "master",
-        "serandomps/contacts-create": "master",
-        "serandomps/contacts-find": "master",
-        "serandomps/contacts-remove": "master",
-        "serandomps/locations-create": "master",
-        "serandomps/locations-find": "master",
-        "serandomps/locations-remove": "master",
+        "serandomps/locate": "master",
+        "serandomps/contacts": "master",
+        "serandomps/locations": "master",
         "serandomps/upload": "master"
     },
     "scripts": [
-        "boot.js",
+        "index.js",
         "controllers/auth.js"
     ],
     "styles": [
-        "boot.css"
+        "index.css"
     ],
     "templates": [
         "component.json",
@@ -54,5 +43,5 @@
     "files": [
         "index.html"
     ],
-    "main": "boot.js"
+    "main": "index.js"
 }
