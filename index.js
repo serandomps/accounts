@@ -23,6 +23,14 @@ var can = function (permission) {
     };
 };
 
+page(function (ctx, next) {
+    serand.emit('loader', 'start', {
+        name: 'accounts-navigation',
+        delay: 500
+    });
+    next();
+});
+
 page('/signin', auth.signin, function (ctx, next) {
     var clientId = ctx.query.client_id;
     var location = ctx.query.redirect_uri;
