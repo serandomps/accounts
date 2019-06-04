@@ -21,9 +21,9 @@ module.exports.signin = function (ctx, next) {
         })
         return;
     }
-    if (ctx.user) {
+    if (ctx.token) {
         redirect('/authorize', null, {
-            user: ctx.user,
+            token: ctx.token,
             options: {
                 clientId: clientId,
                 scope: ctx.query.scope,
@@ -37,7 +37,7 @@ module.exports.signin = function (ctx, next) {
 };
 
 module.exports.force = function (ctx, next) {
-    if (ctx.user) {
+    if (ctx.token) {
         return next();
     }
     var path = ctx.path;

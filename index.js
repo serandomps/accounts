@@ -16,7 +16,7 @@ var dest;
 
 var can = function (permission) {
     return function (ctx, next) {
-        if (ctx.user) {
+        if (ctx.token) {
             return next();
         }
         serand.emit('user', 'login', ctx.path);
@@ -25,7 +25,6 @@ var can = function (permission) {
 
 page(function (ctx, next) {
     serand.emit('loader', 'start', {
-        name: 'accounts-navigation',
         delay: 500
     });
     next();
@@ -169,7 +168,7 @@ page('/profile', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('accounts-client:profile', ctx.user)
+        .add('accounts-client:profile', ctx.token.user)
         .render(ctx, next);
 });
 
@@ -252,7 +251,7 @@ serand.on('user', 'login', function (path) {
     });
 });
 
-serand.on('user', 'logged in', function (usr, options) {
+serand.on('user', 'logged in', function (token, options) {
     options = options || {};
     if (!options.location) {
         return redirect('/');
@@ -262,7 +261,7 @@ serand.on('user', 'logged in', function (usr, options) {
         return redirect('/auth');
     }
     redirect('/authorize', null,{
-        user: usr,
+        token: token,
         options: options
     });
 });
