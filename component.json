@@ -30,7 +30,8 @@
     "templates": [
         "component.json",
         "layouts/one-column.html",
-        "layouts/two-column.html",
+        "layouts/two-column-left.html",
+        "layouts/two-column-right.html",
         "layouts/three-column.html"
     ],
     "images": [

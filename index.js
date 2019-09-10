@@ -173,7 +173,7 @@ page('/profile', function (ctx, next) {
 });
 
 page('/create-contacts', function (ctx, next) {
-    layout('one-column')
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
@@ -181,8 +181,17 @@ page('/create-contacts', function (ctx, next) {
         .render(ctx, next);
 });
 
-page('/contacts/:id/edit', function (ctx, next) {
+page('/contacts/:id', function (ctx, next) {
     layout('one-column')
+        .area('#header')
+        .add('accounts-client:navigation')
+        .area('#middle')
+        .add('contacts:findone', {id: ctx.params.id})
+        .render(ctx, next);
+});
+
+page('/contacts/:id/edit', function (ctx, next) {
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
@@ -191,7 +200,7 @@ page('/contacts/:id/edit', function (ctx, next) {
 });
 
 page('/contacts/:id/delete', function (ctx, next) {
-    layout('one-column')
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
