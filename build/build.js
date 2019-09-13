@@ -6794,7 +6794,7 @@ var permissions = {};
 var loginUri = function (type, location) {
     var o = context[type];
     location = location || o.location;
-    var url = o.login + '?client_id=' + o.clientId
+    var url = o.login + '?client_id=' + o.client
         + (location ? '&redirect_uri=' + location : '')
         + (o.scopes ? '&scope=' + o.scopes.join(',') : '');
     console.log(url);

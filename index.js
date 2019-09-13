@@ -31,7 +31,7 @@ page(function (ctx, next) {
 });
 
 page('/signin', auth.signin, function (ctx, next) {
-    var clientId = ctx.query.client_id;
+    var client = ctx.query.client_id;
     var location = ctx.query.redirect_uri;
     location = location || utils.resolve('accounts:///auth');
     layout('one-column')
@@ -39,14 +39,14 @@ page('/signin', auth.signin, function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:signin', {
-            clientId: clientId,
+            client: client,
             location: location
         })
         .render(ctx, next);
 });
 
 page('/recover', function (ctx, next) {
-    var clientId = ctx.query.client_id;
+    var client = ctx.query.client_id;
     var location = ctx.query.redirect_uri;
     location = location || utils.resolve('accounts:///auth');
     layout('one-column')
@@ -54,7 +54,7 @@ page('/recover', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:recover', {
-            clientId: clientId,
+            client: client,
             location: location
         })
         .render(ctx, next);
@@ -123,7 +123,7 @@ page('/signup', function (ctx, next) {
         .add('home', {title: 'Welcome to serandives.com'})
         .area('#middle')
         .add('accounts-client:signup', {
-            clientId: ctx.query.client_id,
+            client: ctx.query.client_id,
             location: ctx.query.redirect_uri
         })
         .render(ctx, next);
@@ -160,6 +160,15 @@ page('/authorized', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:authorized', ctx.state)
+        .render(ctx, next);
+});
+
+page('/unauthorized', function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-client:navigation')
+        .area('#middle')
+        .add('accounts-client:unauthorized', ctx.state)
         .render(ctx, next);
 });
 
@@ -273,10 +282,6 @@ serand.on('user', 'logged in', function (token, options) {
         token: token,
         options: options
     });
-});
-
-serand.on('user', 'authorized', function (options) {
-    redirect('/authorized', null, options);
 });
 
 serand.on('user', 'logged out', function (usr) {

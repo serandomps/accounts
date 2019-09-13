@@ -6794,7 +6794,7 @@ var permissions = {};
 var loginUri = function (type, location) {
     var o = context[type];
     location = location || o.location;
-    var url = o.login + '?client_id=' + o.clientId
+    var url = o.login + '?client_id=' + o.client
         + (location ? '&redirect_uri=' + location : '')
         + (o.scopes ? '&scope=' + o.scopes.join(',') : '');
     console.log(url);
@@ -6899,7 +6899,7 @@ utils.configs('boot', function (err, config) {
             continue;
         }
         var o = context[name];
-        o.clientId = clients[name];
+        o.client = clients[name];
         var pending = o.pending;
         if (!pending) {
             continue;
@@ -8769,7 +8769,7 @@ var authenticate = function (username, password, options) {
             'X-Host': 'accounts.serandives.com'
         },
         data: {
-            client_id: options.clientId,
+            client_id: options.client,
             grant_type: 'password',
             username: username,
             password: password
@@ -11886,15 +11886,15 @@ module.exports.already = function (ctx, next) {
     //TODO: handle the flow when user has already signed in
     //account or autos module can depend on other modules, but no other module should depend on any
     //other module
-    var clientId = ctx.query.client_id;
-    if (!clientId) {
+    var client = ctx.query.client_id;
+    if (!client) {
         serand.emit('user', 'authenticator', function (err, uri) {
             redirect(uri.substring(base.length));
         });
         return;
     }
     ctx.options = {
-        clientId: clientId,
+        client: client,
         scope: ctx.query.scope,
         location: ctx.query.redirect_uri
     };

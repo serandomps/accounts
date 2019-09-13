@@ -6,9 +6,9 @@ var redirect = serand.redirect;
 var base = utils.resolve('accounts://');
 
 module.exports.signin = function (ctx, next) {
-    var clientId = ctx.query.client_id;
+    var client = ctx.query.client_id;
     var location = ctx.query.redirect_uri
-    if (!clientId || !location) {
+    if (!client || !location) {
         auth.authenticator({
             type: 'serandives',
             location: location || utils.resolve('accounts:///auth')
@@ -25,7 +25,7 @@ module.exports.signin = function (ctx, next) {
         redirect('/authorize', null, {
             token: ctx.token,
             options: {
-                clientId: clientId,
+                client: client,
                 scope: ctx.query.scope,
                 location: location
             }
