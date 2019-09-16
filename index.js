@@ -19,14 +19,12 @@ var can = function (permission) {
         if (ctx.token) {
             return next();
         }
-        serand.emit('user', 'login', ctx.path);
+        utils.emit('user', 'login', ctx.path);
     };
 };
 
 page(function (ctx, next) {
-    serand.emit('loader', 'start', {
-        delay: 500
-    });
+    utils.loading();
     next();
 });
 
@@ -42,6 +40,8 @@ page('/signin', auth.signin, function (ctx, next) {
             client: client,
             location: location
         })
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -57,6 +57,8 @@ page('/recover', function (ctx, next) {
             client: client,
             location: location
         })
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -69,6 +71,8 @@ page('/recovered', function (ctx, next) {
         .add('accounts-client:recovered', {
             email: email
         })
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -83,6 +87,8 @@ page('/confirm', function (ctx, next) {
             user: ctx.query.user,
             otp: ctx.query.otp
         })
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -99,6 +105,8 @@ page('/reset', function (ctx, next) {
             email: email,
             otp: otp
         })
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -114,6 +122,8 @@ page('/auth/oauth', function (ctx, next) {
           error: sera.error,
           errorCode: sera.errorCode
       })
+      .area('#footer')
+      .add('footer')
       .render(ctx, next);
 });
 
@@ -126,6 +136,8 @@ page('/signup', function (ctx, next) {
             client: ctx.query.client_id,
             location: ctx.query.redirect_uri
         })
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -142,6 +154,8 @@ page('/', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:home')
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -151,6 +165,8 @@ page('/authorize', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:authorize', ctx.state)
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -160,6 +176,8 @@ page('/authorized', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:authorized', ctx.state)
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -169,6 +187,8 @@ page('/unauthorized', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:unauthorized', ctx.state)
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -178,6 +198,8 @@ page('/profile', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:profile', ctx.token.user)
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -187,6 +209,8 @@ page('/create-contacts', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:create', {title: 'Create Contacts'})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -196,6 +220,8 @@ page('/contacts/:id', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:findone', {id: ctx.params.id})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -205,6 +231,8 @@ page('/contacts/:id/edit', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:create', {id: ctx.params.id})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -214,6 +242,8 @@ page('/contacts/:id/delete', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:remove', {id: ctx.params.id})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -223,6 +253,8 @@ page('/contacts', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:find', {title: 'Manage Contacts'})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -232,6 +264,8 @@ page('/create-locations', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('locations:create', {title: 'Create Locations'})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -241,6 +275,8 @@ page('/locations/:id/edit', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('locations:create', {id: ctx.params.id})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -250,6 +286,8 @@ page('/locations/:id/delete', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('locations:remove', {id: ctx.params.id})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -259,17 +297,19 @@ page('/locations', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('locations:find', {title: 'Manage Locations'})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
-serand.on('user', 'login', function (path) {
+utils.on('user', 'login', function (path) {
     dest = path;
-    serand.emit('user', 'authenticator', {type: 'serandives', location: dest}, function (err, uri) {
+    utils.emit('user', 'authenticator', {type: 'serandives', location: dest}, function (err, uri) {
         redirect(uri);
     });
 });
 
-serand.on('user', 'logged in', function (token, options) {
+utils.on('user', 'logged in', function (token, options) {
     options = options || {};
     if (!options.location) {
         return redirect('/');
@@ -284,8 +324,8 @@ serand.on('user', 'logged in', function (token, options) {
     });
 });
 
-serand.on('user', 'logged out', function (usr) {
+utils.on('user', 'logged out', function (usr) {
     redirect('/');
 });
 
-serand.emit('serand', 'ready');
+utils.emit('serand', 'ready');
