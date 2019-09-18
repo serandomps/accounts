@@ -193,7 +193,7 @@ page('/unauthorized', function (ctx, next) {
 });
 
 page('/profile', function (ctx, next) {
-    layout('one-column')
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
@@ -248,7 +248,7 @@ page('/contacts/:id/delete', function (ctx, next) {
 });
 
 page('/contacts', function (ctx, next) {
-    layout('one-column')
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
@@ -259,7 +259,7 @@ page('/contacts', function (ctx, next) {
 });
 
 page('/create-locations', function (ctx, next) {
-    layout('one-column')
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
@@ -270,7 +270,7 @@ page('/create-locations', function (ctx, next) {
 });
 
 page('/locations/:id/edit', function (ctx, next) {
-    layout('one-column')
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
@@ -292,7 +292,7 @@ page('/locations/:id/delete', function (ctx, next) {
 });
 
 page('/locations', function (ctx, next) {
-    layout('one-column')
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
