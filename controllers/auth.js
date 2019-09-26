@@ -40,13 +40,13 @@ module.exports.force = function (ctx, next) {
     if (ctx.token) {
         return next();
     }
-    var path = ctx.path;
+    var location = ctx.path;
     var self = utils.resolve('accounts://');
-    if (path.indexOf(self) === 0) {
-        path = path.substring(self.length);
+    if (location.indexOf(self) === 0) {
+        location = location.substring(self.length);
     }
     serand.store('state', {
-        path: path
+        location: location
     });
     redirect('/signin');
 };

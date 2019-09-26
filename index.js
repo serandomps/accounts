@@ -145,7 +145,7 @@ page(auth.force);
 
 page('/auth', function (ctx, next) {
     var state = serand.store('state');
-    state ? redirect(state.path) : redirect('/');
+    state ? redirect(state.location) : redirect('/');
 });
 
 page('/', function (ctx, next) {
