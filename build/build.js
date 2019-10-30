@@ -8476,7 +8476,6 @@ var render = function (links, done) {
 
 dust.loadSource(dust.compile(require('serandomps~navigation@master/template.html'), 'navigation-ui'));
 
-//TODO: fix navigation issue here ruchira
 module.exports = function (sandbox, fn, options) {
     var destroy = function () {
         $('.navigation', sandbox).remove();
