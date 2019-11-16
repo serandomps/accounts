@@ -153,7 +153,7 @@ page('/', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('accounts-client:home')
+        .add('accounts-client:profile-findone')
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -193,11 +193,11 @@ page('/unauthorized', function (ctx, next) {
 });
 
 page('/profile', function (ctx, next) {
-    layout('two-column-right')
+    layout('one-column')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('accounts-client:profile', ctx.token.user)
+        .add('accounts-client:profile-create', ctx.token.user)
         .area('#footer')
         .add('footer')
         .render(ctx, next);
