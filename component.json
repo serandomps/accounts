@@ -19,6 +19,7 @@
         "serandomps/footer": "master",
         "serandomps/contacts": "master",
         "serandomps/locations": "master",
+        "serandomps/vehicles": "master",
         "serandomps/upload": "master"
     },
     "scripts": [

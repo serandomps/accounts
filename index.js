@@ -23,11 +23,6 @@ var can = function (permission) {
     };
 };
 
-page(function (ctx, next) {
-    utils.loading();
-    next();
-});
-
 page('/signin', auth.signin, function (ctx, next) {
     var client = ctx.query.client_id;
     var location = ctx.query.redirect_uri;
@@ -149,11 +144,16 @@ page('/auth', function (ctx, next) {
 });
 
 page('/', function (ctx, next) {
-    layout('one-column')
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:profile-findone')
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -192,12 +192,49 @@ page('/unauthorized', function (ctx, next) {
         .render(ctx, next);
 });
 
-page('/profile', function (ctx, next) {
-    layout('one-column')
+page('/users/:id', function (ctx, next) {
+    layout('two-column-right')
+        .area('#header')
+        .add('accounts-client:navigation')
+        .area('#middle')
+        .add('accounts-client:profile-findone', ctx.params)
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
+        .area('#footer')
+        .add('footer')
+        .render(ctx, next);
+});
+
+page('/users/me/edit', function (ctx, next) {
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:profile-create', ctx.token.user)
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
+        .area('#footer')
+        .add('footer')
+        .render(ctx, next);
+});
+
+page('/users/me/password', function (ctx, next) {
+    layout('two-column-right')
+        .area('#header')
+        .add('accounts-client:navigation')
+        .area('#middle')
+        .add('accounts-client:password', ctx.token.user)
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -209,17 +246,27 @@ page('/create-contacts', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:create', {title: 'Create Contacts'})
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
 });
 
 page('/contacts/:id', function (ctx, next) {
-    layout('one-column')
+    layout('two-column-right')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:findone', {id: ctx.params.id})
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -231,6 +278,11 @@ page('/contacts/:id/edit', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:create', {id: ctx.params.id})
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -242,6 +294,11 @@ page('/contacts/:id/delete', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:remove', {id: ctx.params.id})
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -253,6 +310,11 @@ page('/contacts', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('contacts:find', {title: 'Manage Contacts'})
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -264,6 +326,11 @@ page('/create-locations', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('locations:create', {title: 'Create Locations'})
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -275,6 +342,11 @@ page('/locations/:id/edit', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('locations:create', {id: ctx.params.id})
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -286,6 +358,11 @@ page('/locations/:id/delete', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('locations:remove', {id: ctx.params.id})
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -297,6 +374,11 @@ page('/locations', function (ctx, next) {
         .add('accounts-client:navigation')
         .area('#middle')
         .add('locations:find', {title: 'Manage Locations'})
+        .area('#right')
+        .add('vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
