@@ -71,6 +71,20 @@ page('/recovered', function (ctx, next) {
         .render(ctx, next);
 });
 
+page('/registered', function (ctx, next) {
+    var email = ctx.query.email;
+    layout('one-column')
+        .area('#header')
+        .add('accounts-client:navigation')
+        .area('#middle')
+        .add('accounts-client:registered', {
+            email: email
+        })
+        .area('#footer')
+        .add('footer')
+        .render(ctx, next);
+});
+
 page('/confirm', function (ctx, next) {
     var email = ctx.query.email;
     layout('one-column')
