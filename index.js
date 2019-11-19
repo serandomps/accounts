@@ -125,7 +125,7 @@ page('/auth/oauth', function (ctx, next) {
 page('/signup', function (ctx, next) {
     layout('one-column')
         .area('#header')
-        .add('home', {title: 'Welcome to serandives.com'})
+        .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:signup', {
             client: ctx.query.client_id,

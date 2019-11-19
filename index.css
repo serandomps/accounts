@@ -7,13 +7,3 @@
     padding-bottom: 30px;
     padding-top: 70px;
 }
-
-.login .facebook {
-    color: #3b5998;
-    background: rgba(59, 89, 152, 0.1);
-}
-
-.login .google {
-    color: #d14130;
-    background: rgba(209, 65, 48, 0.1);
-}
