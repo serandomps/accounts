@@ -164,7 +164,7 @@ page('/', function (ctx, next) {
         .area('#middle')
         .add('accounts-client:profile-findone')
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -213,7 +213,7 @@ page('/users/:id', function (ctx, next) {
         .area('#middle')
         .add('accounts-client:profile-findone', ctx.params)
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -229,7 +229,7 @@ page('/users/me/edit', function (ctx, next) {
         .area('#middle')
         .add('accounts-client:profile-create', ctx.token.user)
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -245,7 +245,7 @@ page('/users/me/password', function (ctx, next) {
         .area('#middle')
         .add('accounts-client:password', ctx.token.user)
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -259,9 +259,9 @@ page('/create-contacts', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('contacts:create', {title: 'Create Contacts'})
+        .add('model-contacts:create', {title: 'Create Contacts'})
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -275,9 +275,9 @@ page('/contacts/:id', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('contacts:findone', {id: ctx.params.id})
+        .add('model-contacts:findone', {id: ctx.params.id})
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -291,9 +291,9 @@ page('/contacts/:id/edit', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('contacts:create', {id: ctx.params.id})
+        .add('model-contacts:create', {id: ctx.params.id})
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -307,9 +307,9 @@ page('/contacts/:id/delete', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('contacts:remove', {id: ctx.params.id})
+        .add('model-contacts:remove', {id: ctx.params.id})
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -323,9 +323,9 @@ page('/contacts', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('contacts:find', {title: 'Manage Contacts'})
+        .add('model-contacts:find', {title: 'Manage Contacts'})
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -339,9 +339,9 @@ page('/create-locations', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('locations:create', {title: 'Create Locations'})
+        .add('model-locations:create', {title: 'Create Locations'})
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -355,9 +355,9 @@ page('/locations/:id/edit', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('locations:create', {id: ctx.params.id})
+        .add('model-locations:create', {id: ctx.params.id})
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -371,9 +371,9 @@ page('/locations/:id/delete', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('locations:remove', {id: ctx.params.id})
+        .add('model-locations:remove', {id: ctx.params.id})
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })
@@ -387,9 +387,9 @@ page('/locations', function (ctx, next) {
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
-        .add('locations:find', {title: 'Manage Locations'})
+        .add('model-locations:find', {title: 'Manage Locations'})
         .area('#right')
-        .add('vehicles:recent', {
+        .add('model-vehicles:recent', {
             title: 'Recent Vehicles',
             external: true
         })

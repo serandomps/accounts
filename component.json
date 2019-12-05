@@ -17,9 +17,9 @@
         "serandomps/breadcrumb": "master",
         "serandomps/navigation": "master",
         "serandomps/footer": "master",
-        "serandomps/contacts": "master",
-        "serandomps/locations": "master",
-        "serandomps/vehicles": "master",
+        "serandomps/model-contacts": "master",
+        "serandomps/model-locations": "master",
+        "serandomps/model-vehicles": "master",
         "serandomps/upload": "master"
     },
     "scripts": [

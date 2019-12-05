@@ -7467,7 +7467,7 @@ var render = function (sandbox, fn, data) {
             el.closest('.file').remove();
         });
         fn(false, function () {
-            $('.vehicles-create', sandbox).remove();
+            $('.model-vehicles-create', sandbox).remove();
         });
     });
 };
@@ -8190,7 +8190,7 @@ module.exports = function (sandbox, fn, options) {
                 }
                 fn(false, {
                     clean: function () {
-                        $('.vehicles-findone', sandbox).remove();
+                        $('.model-vehicles-findone', sandbox).remove();
                     },
                     done: function () {
                         var i;
@@ -8266,7 +8266,7 @@ var list = function (el, options, fn) {
         dataType: 'json',
         success: function (data) {
             dust.render('vehicles-find', utils.cdn288x162(data), function (err, out) {
-                $('.vehicles-find', el).remove();
+                $('.model-vehicles-find', el).remove();
                 el.off('click', '.auto-sort .btn');
                 el.append(out);
                 el.on('click', '.auto-sort .btn', function () {
@@ -8285,7 +8285,7 @@ var list = function (el, options, fn) {
                     return;
                 }
                 fn(false, function () {
-                    $('.vehicles-find', el).remove();
+                    $('.model-vehicles-find', el).remove();
                 });
             });
         },
@@ -8374,7 +8374,7 @@ module.exports = function (sandbox, fn, options) {
         });
 
         fn(false, function () {
-            $('.vehicles-search', sandbox).remove();
+            $('.model-vehicles-search', sandbox).remove();
         });
     });
 };
