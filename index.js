@@ -270,6 +270,66 @@ page('/create-contacts', function (ctx, next) {
         .render(ctx, next);
 });
 
+page('/contacts/:id/review', function (ctx, next) {
+    layout('two-column-right')
+        .area('#header')
+        .add('accounts-client:navigation')
+        .area('#middle')
+        .add('model-contacts:review', {
+            id: ctx.params.id,
+            aborted: ctx.query.aborted,
+            location: ctx.query.location
+        })
+        .area('#right')
+        .add('model-vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
+        .area('#footer')
+        .add('footer')
+        .render(ctx, next);
+});
+
+page('/contacts/:id/verify', function (ctx, next) {
+    layout('two-column-right')
+        .area('#header')
+        .add('accounts-client:navigation')
+        .area('#middle')
+        .add('model-contacts:verify', {
+            id: ctx.params.id,
+            aborted: ctx.query.aborted,
+            location: ctx.query.location
+        })
+        .area('#right')
+        .add('model-vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
+        .area('#footer')
+        .add('footer')
+        .render(ctx, next);
+});
+
+page('/contacts/:id/confirm', function (ctx, next) {
+    layout('two-column-right')
+        .area('#header')
+        .add('accounts-client:navigation')
+        .area('#middle')
+        .add('model-contacts:confirm', {
+            id: ctx.params.id,
+            aborted: ctx.query.aborted,
+            location: ctx.query.location
+        })
+        .area('#right')
+        .add('model-vehicles:recent', {
+            title: 'Recent Vehicles',
+            external: true
+        })
+        .area('#footer')
+        .add('footer')
+        .render(ctx, next);
+});
+
 page('/contacts/:id', function (ctx, next) {
     layout('two-column-right')
         .area('#header')
