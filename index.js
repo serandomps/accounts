@@ -318,7 +318,9 @@ page('/contacts/:id/confirm', function (ctx, next) {
         .add('model-contacts:confirm', {
             id: ctx.params.id,
             aborted: ctx.query.aborted,
-            location: ctx.query.location
+            location: ctx.query.location,
+            email: ctx.query.email,
+            phone: ctx.query.phone
         })
         .area('#right')
         .add('model-vehicles:recent', {
