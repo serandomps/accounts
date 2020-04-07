@@ -33,7 +33,8 @@ page('/signin', auth.signin, function (ctx, next) {
         .area('#middle')
         .add('accounts-client:signin', {
             client: client,
-            location: location
+            location: location,
+            error: ctx.state.error
         })
         .area('#footer')
         .add('footer')
@@ -136,14 +137,30 @@ page('/auth/oauth', function (ctx, next) {
       .render(ctx, next);
 });
 
-page('/signup', function (ctx, next) {
+page('/signup', auth.signup, function (ctx, next) {
     layout('one-column')
         .area('#header')
         .add('accounts-client:navigation')
         .area('#middle')
         .add('accounts-client:signup', {
             client: ctx.query.client_id,
-            location: ctx.query.redirect_uri
+            location: ctx.query.redirect_uri,
+            error: ctx.state.error
+        })
+        .area('#footer')
+        .add('footer')
+        .render(ctx, next);
+});
+
+page('/signup-facebook', auth.signup, function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('accounts-client:navigation')
+        .area('#middle')
+        .add('accounts-client:signup-facebook', {
+            client: ctx.query.client_id,
+            location: ctx.query.redirect_uri,
+            error: ctx.state.error
         })
         .area('#footer')
         .add('footer')

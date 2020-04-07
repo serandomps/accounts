@@ -18,7 +18,7 @@ module.exports.signin = function (ctx, next) {
             }
             uri = uri.substring(base.length);
             redirect(uri);
-        })
+        });
         return;
     }
     if (ctx.token) {
@@ -34,6 +34,23 @@ module.exports.signin = function (ctx, next) {
     }
     serand.store('oauth', null);
     next();
+};
+
+module.exports.signup = function (ctx, next) {
+    var client = ctx.query.client_id;
+    var location = ctx.query.redirect_uri
+    if (client && location) {
+        return next();
+    }
+    auth.registrar({
+        path: ctx.pathname,
+        location: location || utils.resolve('accounts:///auth')
+    }, function (err, uri) {
+        if (err) {
+            return next(err);
+        }
+        redirect(uri);
+    });
 };
 
 module.exports.force = function (ctx, next) {
