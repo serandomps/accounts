@@ -105,6 +105,7 @@ page('/confirm', function (ctx, next) {
 page('/reset', function (ctx, next) {
     var user = ctx.query.user;
     var email = ctx.query.email;
+    var username = ctx.query.username;
     var otp = ctx.query.otp;
     layout('one-column')
         .area('#header')
@@ -113,6 +114,7 @@ page('/reset', function (ctx, next) {
         .add('accounts-client:reset', {
             user: user,
             email: email,
+            username: username,
             otp: otp
         })
         .area('#footer')
