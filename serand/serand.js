@@ -6818,7 +6818,7 @@ var emit = function (usr) {
 
 var update = function (usr) {
     user = usr;
-    serand.store('user', usr);
+    serand.persist('user', usr);
     if (!usr) {
         clearTimeout(refresher);
     }
@@ -6921,7 +6921,7 @@ var next = function (expires) {
 };
 
 var initialize = function () {
-    var usr = serand.store('user');
+    var usr = serand.persist('user');
     if (!usr) {
         return emitup(null);
     }
@@ -8849,7 +8849,7 @@ module.exports = function (sandbox, fn, options) {
 };
 
 var token = function (o) {
-    var options = serand.store('oauth');
+    var options = serand.persist('oauth');
     $.ajax({
         method: 'POST',
         url: '/apis/v/tokens',
@@ -8893,7 +8893,7 @@ var token = function (o) {
 };
 
 serand.on('user', 'oauth', function (options) {
-    serand.store('oauth', options);
+    serand.persist('oauth', options);
     serand.emit('user', 'authenticator', {
         type: 'facebook'
     }, function (err, uri) {

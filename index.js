@@ -172,7 +172,7 @@ page('/signup-facebook', auth.signup, function (ctx, next) {
 page(auth.force);
 
 page('/auth', function (ctx, next) {
-    var state = serand.store('state');
+    var state = serand.persist('state');
     state ? redirect(state.location) : redirect('/');
 });
 

@@ -32,7 +32,7 @@ module.exports.signin = function (ctx, next) {
         });
         return;
     }
-    serand.store('oauth', null);
+    serand.persist('oauth', null);
     next();
 };
 
@@ -62,7 +62,7 @@ module.exports.force = function (ctx, next) {
     if (location.indexOf(self) === 0) {
         location = location.substring(self.length);
     }
-    serand.store('state', {
+    serand.persist('state', {
         location: location
     });
     redirect('/signin');
