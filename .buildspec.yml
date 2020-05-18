@@ -8,3 +8,7 @@ phases:
       - cd .deploy; npm install; cd ..
       - ./.deploy/components ${NAME} ${REVISION}
       - echo Build completed on `date`
+
+artifacts:
+  files:
+    - '*/artifacts.json'
