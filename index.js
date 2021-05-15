@@ -1,5 +1,6 @@
 var serand = require('serand');
 var utils = require('utils');
+var watcher = require('watcher');
 var page = serand.page;
 var redirect = serand.redirect;
 
@@ -19,7 +20,7 @@ var can = function (permission) {
         if (ctx.token) {
             return next();
         }
-        utils.emit('user', 'login', ctx.path);
+        watcher.emit('user', 'login', ctx.path);
     };
 };
 
@@ -463,14 +464,14 @@ page('/locations', function (ctx, next) {
         .render(ctx, next);
 });
 
-utils.on('user', 'login', function (path) {
+watcher.on('user', 'login', function (path) {
     dest = path;
-    utils.emit('user', 'authenticator', {type: 'serandives', location: dest}, function (err, uri) {
+    watcher.emit('user', 'authenticator', {type: 'serandives', location: dest}, function (err, uri) {
         redirect(uri);
     });
 });
 
-utils.on('user', 'logged in', function (token, options) {
+watcher.on('user', 'logged in', function (token, options) {
     options = options || {};
     if (!options.location) {
         return redirect('/');
@@ -485,8 +486,10 @@ utils.on('user', 'logged in', function (token, options) {
     });
 });
 
-utils.on('user', 'logged out', function (usr) {
+watcher.on('user', 'logged out', function (usr) {
     redirect('/');
 });
 
-utils.emit('serand', 'ready');
+watcher.emit('serand', 'ready');
+
+// serand:ready -> initialize -> findToken -> refresh -> user:ready|user:refreshed|user:loggedin|user:loggedout -> currentToken|cookies ->
